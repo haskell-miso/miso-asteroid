@@ -1,4 +1,4 @@
-:ramen: :rocket: miso-asteroid
+:ramen: :rocket: 🪨 miso-asteroid 
 ====================
 
 See it [live](https://asteroid.haskell-miso.org)
