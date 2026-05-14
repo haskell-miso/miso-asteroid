@@ -1,5 +1,6 @@
 ----------------------------------------------------------------------------
 -- Asteroids in Miso
+-- https://github.com/haskell-miso/miso-asteroid
 -- Controls: ← → rotate  ↑ thrust  SPACE shoot  R restart
 ----------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
@@ -311,9 +312,28 @@ viewModel m@Model{..} =
         , CSS.color (CSS.hex "0f0")
         , ("user-select", "none")
         ] ]
-    [ hudBar _score _lives _gs
+    [ repoBar
+    , hudBar _score _lives _gs
     , gameCanvas m
     , helpBar
+    ]
+
+repoBar :: View Model Action
+repoBar =
+  H.div_
+    [ CSS.style_
+        [ CSS.width "800px"
+        , CSS.padding "4px 0"
+        , CSS.fontSize "12px"
+        , CSS.color (CSS.hex "0a0")
+        , CSS.textAlign "right"
+        ] ]
+    [ H.a_
+        [ HP.href_ "https://github.com/haskell-miso/miso-asteroid"
+        , HP.target_ "_blank"
+        , CSS.style_ [ CSS.color (CSS.hex "0a0") ]
+        ]
+        [ text "github.com/haskell-miso/miso-asteroid" ]
     ]
 
 hudBar :: Int -> Int -> GameState -> View Model Action
