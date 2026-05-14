@@ -1,11 +1,15 @@
 :ramen: :rocket: 🪨 miso-asteroid 
 ====================
 
-<a href="https://asteroid.haskell-miso.org">
-<img width="833" height="439" alt="image" src="https://github.com/user-attachments/assets/30cf2650-3c4a-4295-bf55-bd672174597f" />
-</a>
+This game was written in Claude Sonnet 4.6 with the prompt (below).
 
-See it [live](https://asteroid.haskell-miso.org)
+> Can you make the game of asteriods in sample-app/Main.hs in miso?
+
+See it [live](https://asteroid.haskell-miso.org).
+
+<a href="https://asteroid.haskell-miso.org">
+  <img width="833" height="439" alt="image" src="https://github.com/user-attachments/assets/30cf2650-3c4a-4295-bf55-bd672174597f" />
+</a>
 
 ### Development
 
