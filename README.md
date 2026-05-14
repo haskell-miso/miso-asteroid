@@ -1,8 +1,9 @@
 :ramen: :rocket: 🪨 miso-asteroid 
 ====================
 
+<a href="https://asteroid.haskell-miso.org">
 <img width="833" height="439" alt="image" src="https://github.com/user-attachments/assets/30cf2650-3c4a-4295-bf55-bd672174597f" />
-
+</a>
 
 See it [live](https://asteroid.haskell-miso.org)
 
