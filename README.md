@@ -1,6 +1,9 @@
 :ramen: :rocket: 🪨 miso-asteroid 
 ====================
 
+<img width="833" height="439" alt="image" src="https://github.com/user-attachments/assets/30cf2650-3c4a-4295-bf55-bd672174597f" />
+
+
 See it [live](https://asteroid.haskell-miso.org)
 
 ### Development
