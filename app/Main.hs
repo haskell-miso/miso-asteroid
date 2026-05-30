@@ -80,6 +80,7 @@ data Model = Model
   , _nextId     :: Int
   , _cooldown   :: Int    -- shoot cooldown
   , _invincible :: Int    -- invincibility frames after being hit
+  , _time       :: Double
   } deriving (Show, Eq)
 ----------------------------------------------------------------------------
 -- Lenses
@@ -94,6 +95,7 @@ gs_        :: Lens Model GameState;  gs_        = lens _gs         (\r v -> r { 
 nextId_    :: Lens Model Int;        nextId_    = lens _nextId     (\r v -> r { _nextId     = v })
 cooldown_  :: Lens Model Int;        cooldown_  = lens _cooldown   (\r v -> r { _cooldown   = v })
 invincible_:: Lens Model Int;        invincible_= lens _invincible (\r v -> r { _invincible = v })
+time_      :: Lens Model Double;     time_      = lens _time       (\r v -> r { _time = v })
 ----------------------------------------------------------------------------
 -- Initial state
 ----------------------------------------------------------------------------
@@ -121,6 +123,7 @@ initModel = Model
   , _nextId     = 10
   , _cooldown   = 0
   , _invincible = 0
+  , _time       = 0
   }
 ----------------------------------------------------------------------------
 -- Entry point
@@ -141,26 +144,21 @@ foreign export javascript "hs_start" main :: IO ()
 
 app :: App Model Action
 app = (component initModel updateModel viewModel)
-        { subs = [ keyboardSub KeyChange, tickSub ] }
-
-tickSub :: Sub Action
-tickSub sink = forever $ do
-  threadDelay 16667   -- ~60 fps
-  sink Tick
+        { subs = [ keyboardSub KeyChange, rAFSub Tick ] }
 ----------------------------------------------------------------------------
 -- Actions
 ----------------------------------------------------------------------------
 data Action
-  = Tick
+  = Tick Double
   | KeyChange IntSet
   deriving (Show, Eq)
 ----------------------------------------------------------------------------
 -- Update
 ----------------------------------------------------------------------------
-updateModel :: Action -> Effect parent Model Action
+updateModel :: Action -> Effect parent props Model Action
 updateModel = \case
   KeyChange ks -> keys_ .= ks
-  Tick         -> modify step
+  Tick _       -> modify step
 
 step :: Model -> Model
 step m@Model{..} =
@@ -298,8 +296,8 @@ pt x y = mc x <> "," <> mc y
 ----------------------------------------------------------------------------
 -- View
 ----------------------------------------------------------------------------
-viewModel :: Model -> View Model Action
-viewModel m@Model{..} =
+viewModel :: props -> Model -> View Model Action
+viewModel _ m@Model{..} =
   H.div_
     [ CSS.style_
         [ CSS.margin "0"
